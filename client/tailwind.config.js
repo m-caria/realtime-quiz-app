@@ -9,8 +9,11 @@ export default {
 		extend: {
 			colors: {
 				primary: '#FB923C',
-				stone: '#A1A1AA',
+				secondary: '#166534',
+				'stone-gray': '#A1A1AA',
 				transparent: 'transparent',
+				danger: '#DC2626',
+				black: '#121212',
 			},
 		},
 	},
