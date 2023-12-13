@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { Button, Input, Modal, Typography } from '../../components';
-import { faHouse, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
+import {
+	faHouse,
+	faPlus,
+	faUser,
+	faUsers,
+} from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
+	const navigate = useNavigate();
 	const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
 	return (
 		<div className="h-full w-full pt-24 flex-col flex font-secondary">
@@ -29,7 +36,7 @@ const HomePage: React.FC = () => {
 						<div className="flex justify-between items-center gap-2">
 							<Button
 								variant="wrapper"
-								className="bg-stone-gray hover:bg-opacity-70 w-full flex justify-between"
+								className="!bg-stone-400 hover:!bg-opacity-70 w-full flex justify-between"
 							>
 								<Typography type="span" className="!text-xl">
 									Test Room
@@ -52,19 +59,25 @@ const HomePage: React.FC = () => {
 				title="Crea una Quiz Room"
 				onClose={() => setIsCreateRoomModalOpen(false)}
 			>
+				<Input
+					className="basis-4/6"
+					label="Nome Room"
+					icon={faHouse}
+					placeholder="Inserisci il nome della quiz room..."
+				/>
 				<div className="flex gap-2">
 					<Input
-						className="basis-4/6"
-						label="Nome Room"
-						icon={faHouse}
-						placeholder="Inserisci il nome della quiz room..."
+						label="Nome utente"
+						icon={faUser}
+						placeholder="Inserisci il nome utente..."
 					/>
 					<Input
 						className="basis-2/6"
-						label="Numero partecipanti"
+						label="Partecipanti"
 						icon={faUsers}
 						placeholder="0"
 						type="number"
+						defaultValue={2}
 					/>
 				</div>
 				<Button
@@ -74,7 +87,7 @@ const HomePage: React.FC = () => {
 					size="large"
 					text="Crea Quiz Room"
 					className="font-secondary"
-					onClick={() => setIsCreateRoomModalOpen(true)}
+					onClick={() => navigate(`/quiz-room/1`)}
 				/>
 			</Modal>
 		</div>
