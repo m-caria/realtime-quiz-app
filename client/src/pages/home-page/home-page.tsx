@@ -1,16 +1,20 @@
-import { useState } from 'react';
-import { Button, Input, Modal, Typography } from '../../components';
-import {
-	faHouse,
-	faPlus,
-	faUser,
-	faUsers,
-} from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { Button, Modal, Typography } from '../../components';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { CreateRoomForm, QuizRoomList } from './components';
 import { useNavigate } from 'react-router-dom';
+import { usePreloader } from '../../hooks';
 
 const HomePage: React.FC = () => {
+	usePreloader();
 	const navigate = useNavigate();
 	const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
+
+	useEffect(() => {
+		const user = window.sessionStorage.getItem('user');
+		if (!user) navigate('/pre-connect');
+	}, [navigate]);
+
 	return (
 		<div className="h-full w-full pt-24 flex-col flex font-secondary">
 			<Typography
@@ -32,25 +36,7 @@ const HomePage: React.FC = () => {
 					<Typography type="h3" className="uppercase">
 						Entra in una quiz room
 					</Typography>
-					<ul className="border-2 border-primary rounded-xl p-4">
-						<div className="flex justify-between items-center gap-2">
-							<Button
-								variant="wrapper"
-								className="!bg-stone-400 hover:!bg-opacity-70 w-full flex justify-between"
-							>
-								<Typography type="span" className="!text-xl">
-									Test Room
-								</Typography>
-								<div className="flex gap-2 items-center">
-									<div className="rounded-full w-3 h-3 bg-primary border-[1px] border-black" />
-									<Typography type="span" className="!text-lg">
-										4/6
-									</Typography>
-								</div>
-							</Button>
-							<Typography type="span">30s</Typography>
-						</div>
-					</ul>
+					<QuizRoomList />
 				</div>
 			</div>
 			<Modal
@@ -59,36 +45,7 @@ const HomePage: React.FC = () => {
 				title="Crea una Quiz Room"
 				onClose={() => setIsCreateRoomModalOpen(false)}
 			>
-				<Input
-					className="basis-4/6"
-					label="Nome Room"
-					icon={faHouse}
-					placeholder="Inserisci il nome della quiz room..."
-				/>
-				<div className="flex gap-2">
-					<Input
-						label="Nome utente"
-						icon={faUser}
-						placeholder="Inserisci il nome utente..."
-					/>
-					<Input
-						className="basis-2/6"
-						label="Partecipanti"
-						icon={faUsers}
-						placeholder="0"
-						type="number"
-						defaultValue={2}
-					/>
-				</div>
-				<Button
-					icon={faPlus}
-					iconPosition="right"
-					variant="secondary"
-					size="large"
-					text="Crea Quiz Room"
-					className="font-secondary"
-					onClick={() => navigate(`/quiz-room/1`)}
-				/>
+				<CreateRoomForm isCreatingRoom />
 			</Modal>
 		</div>
 	);

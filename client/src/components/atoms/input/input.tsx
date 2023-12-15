@@ -9,7 +9,12 @@ type Props = {
 	label?: string;
 	placeholder?: string;
 	type?: 'input' | 'number';
-} & Partial<React.HTMLAttributes<HTMLInputElement>>;
+} & Partial<
+	React.DetailedHTMLProps<
+		React.InputHTMLAttributes<HTMLInputElement>,
+		HTMLInputElement
+	>
+>;
 
 const Input = React.forwardRef<HTMLInputElement, Props>(
 	({ icon, placeholder, type = 'input', error, label, ...props }, ref) => (
@@ -37,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
 						error
 							? 'border-danger text-danger placeholder:text-danger'
 							: 'border-primary text-primary placeholder:text-stone-gray'
-					} box-border w-full rounded-xl border-2 py-2 text-sm focus:outline-none md:pr-2 md:text-lg ${
+					} box-border w-full rounded-xl border-2 py-2 text-sm focus:outline-none md:pr-2 md:text-lg disabled:!bg-stone-200 ${
 						icon || placeholder ? 'pl-10 md:pl-12' : 'pl-2 md:pl-4'
 					}`}
 					placeholder={placeholder}
