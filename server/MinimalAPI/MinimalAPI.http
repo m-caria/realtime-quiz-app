@@ -1,0 +1,6 @@
+@MinimalAPI_HostAddress = http://localhost:5133
+
+GET {{MinimalAPI_HostAddress}}/quiz-hub/
+Accept: application/json
+
+###
