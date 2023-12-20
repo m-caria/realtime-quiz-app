@@ -2,6 +2,14 @@
 
 Progetto test per gestire delle quiz room in realtime.
 
+## Gestione stanze
+https://github.com/m-caria/realtime-quiz-app/assets/129378448/7f567cd6-ceb0-4546-979f-5bf6fb9e4df7
+
+## Quiz Room
+https://github.com/m-caria/realtime-quiz-app/assets/129378448/aa6b55eb-09a5-4d39-a397-7c458963da0e
+
+https://github.com/m-caria/realtime-quiz-app/assets/129378448/afd76184-bc84-4b17-aeaf-54f8486269e7
+
 ## Requisiti
 
 - Avere installato l'SDK [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
@@ -13,6 +21,10 @@ Progetto test per gestire delle quiz room in realtime.
 - Avviare il progetto client: `cd client && pnpm dev` | `cd client && yarn dev` | `cd client && npm run dev`
 
 ## Regole
+
+
+
+
 
 - Per poter giocare è necessario indicare un nome utente
 - Chiunque ha la possibilità di creare una stanza di gioco scegliendo il numero massimo di giocatori
