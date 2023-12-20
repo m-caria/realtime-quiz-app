@@ -37,6 +37,7 @@ Librerie utilizzate:
 - **tailwindcss**: styling
 - **moment**: gestione data e ora
 - **react-hook-form**: gestione dei forms
+- **vitest**: testing
 
 ### Struttura Progetto
 
@@ -54,7 +55,7 @@ Il progetto è strutturato come segue:
 - **providers**
 - **routes**
 - **store** (configurazione dello stato)
-  - **(scope)** (actions, reducers, thunks, chiamate api, selectors e hooks relativi allo scope)
+  - **(scope)** (actions, reducers, thunks, chiamate api, selectors e hooks relativi allo scope)git
 - **types**
 
 ### Server
@@ -90,4 +91,5 @@ Il progetto è strutturato come segue:
 
 ### Note
 
-Il progetto è stato sviluppato in circa 36 ore per cui potrebbe sicuramente avere qualche bug
+Il progetto è stato sviluppato in circa 36 ore per cui potrebbe sicuramente avere qualche bug.
+E' stato creato un test indicativo sia lato front end che lato back end.

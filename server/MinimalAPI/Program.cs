@@ -34,3 +34,5 @@ app.QuizRoomEndpointsMap();
 app.QuizRoomScoreEndpointsMap();
 
 app.Run();
+
+public partial class Program { }

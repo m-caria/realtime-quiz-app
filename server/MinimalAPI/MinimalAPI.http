@@ -1,6 +1,29 @@
-@MinimalAPI_HostAddress = http://localhost:5133
+@MinimalAPI_HostAddress = https://localhost:7064
 
-GET {{MinimalAPI_HostAddress}}/quiz-hub/
-Accept: application/json
+POST {{MinimalAPI_HostAddress}}/api/rooms
+
+###
+
+GET {{MinimalAPI_HostAddress}}/api/rooms
+
+###
+
+GET {{MinimalAPI_HostAddress}}/api/rooms/{roomId}
+
+###
+
+POST {{MinimalAPI_HostAddress}}/api/rooms/{roomId}/players
+
+###
+
+POST {{MinimalAPI_HostAddress}}/api/scores/{roomId}
+
+###
+
+POST {{MinimalAPI_HostAddress}}/api/users
+
+###
+
+GET {{MinimalAPI_HostAddress}}/api/users/{username}
 
 ###
