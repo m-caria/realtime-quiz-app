@@ -1,17 +1,28 @@
 import { useEffect } from 'react';
-import { useApplicationUser, useQuizRoom } from '../store';
+import { DomainStatus, useApplicationUser, useQuizRoom } from '../store';
 import { UserResponse } from '../types';
 
 export const usePreloader = () => {
-	const { getUser } = useApplicationUser();
-	const { getQuizRooms } = useQuizRoom();
+	const { applicationUser, getUser } = useApplicationUser();
+	const { quizRooms, getQuizRooms } = useQuizRoom();
 
 	useEffect(() => {
 		const sessionUser = window.sessionStorage.getItem('user');
 		if (sessionUser) {
 			const user = JSON.parse(sessionUser) as UserResponse;
-			getUser({ username: user.username });
-			getQuizRooms();
+			if (
+				applicationUser.status !== DomainStatus.LOADED &&
+				applicationUser.status !== DomainStatus.LOADING
+			) {
+				getUser({ username: user.username });
+			}
+
+			if (
+				quizRooms.status !== DomainStatus.LOADING &&
+				quizRooms.status !== DomainStatus.LOADED
+			) {
+				getQuizRooms();
+			}
 		}
-	}, [getUser, getQuizRooms]);
+	}, [getUser, getQuizRooms, applicationUser.status, quizRooms.status]);
 };

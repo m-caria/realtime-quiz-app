@@ -1,7 +1,8 @@
 ﻿namespace MinimalAPI.Hubs.Models;
-public record OnPlayerJoinInRoomData
+public record OnTryToAnswerData
 {
     public Guid RoomId { get; set; }
+    public Guid QuestionId { get; set; }
     public string PlayerName { get; set; } = string.Empty;
-    public int TotalRoomPlayers { get; set; }
+    public string Answer { get; set; } = string.Empty;
 }

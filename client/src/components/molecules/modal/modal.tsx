@@ -7,6 +7,7 @@ type Props = {
 	isOpened: boolean;
 	modalSize?: SizeKeys;
 	onClose?: () => void;
+	closable?: boolean;
 } & Partial<React.HTMLAttributes<HTMLDivElement>>;
 
 const Modal: React.FC<Props> = ({
@@ -14,6 +15,7 @@ const Modal: React.FC<Props> = ({
 	onClose,
 	modalSize = 'small',
 	title,
+	closable = true,
 	children,
 	...props
 }) => {
@@ -35,15 +37,17 @@ const Modal: React.FC<Props> = ({
 								{...props}
 								className={`${props.className} bg-white px-4 pt-8 p-6 pb-4`}
 							>
-								<div className="absolute right-1 top-1">
-									<Button
-										variant="wrapper"
-										icon={faTimes}
-										title="Chiudi"
-										className="text-stone-gray hover:bg-stone-gray hover:bg-opacity-30 hover:text-primary rounded-full"
-										onClick={onClose}
-									/>
-								</div>
+								{closable && (
+									<div className="absolute right-1 top-1">
+										<Button
+											variant="wrapper"
+											icon={faTimes}
+											title="Chiudi"
+											className="text-stone-gray hover:bg-stone-gray hover:bg-opacity-30 hover:text-primary rounded-full"
+											onClick={onClose}
+										/>
+									</div>
+								)}
 								<div className="flex flex-col gap-4 h-full">
 									<Typography type="h2" className="text-center font-bold">
 										{title}

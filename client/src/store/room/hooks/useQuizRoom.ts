@@ -5,8 +5,25 @@ import {
 	getQuizRoomIds,
 	getQuizRoomState,
 } from '../selectors';
-import { CreateQuizRoomRequest } from '../../../types';
-import { createQuizRoomThunk, getQuizRoomsThunk } from '../thunks';
+import {
+	AddPointToPlayerRequest,
+	CreateQuizRoomRequest,
+	ManagePlayersRequest,
+	OnAddPlayerScoreMessage,
+	OnCreateQuizRoomMessage,
+	OnPlayerJoinOrLeftInRoomMessage,
+} from '../../../types';
+import {
+	addPointToPlayerThunk,
+	createQuizRoomThunk,
+	getQuizRoomsThunk,
+	managePlayersThunk,
+} from '../thunks';
+import {
+	onAddScoreToPlayer,
+	onCreateQuizRoom,
+	onPlayerJoinOrLeftInRoom,
+} from '../reducers/rootSlice';
 
 export const useQuizRoom = () => {
 	const dispatch = useAppDispatch();
@@ -26,11 +43,51 @@ export const useQuizRoom = () => {
 		[dispatch]
 	);
 
+	const onQuizRoomCreated = useCallback(
+		(payload: OnCreateQuizRoomMessage) => {
+			dispatch(onCreateQuizRoom(payload));
+		},
+		[dispatch]
+	);
+
+	const onPlayerJoinOrLeftInQuizRoom = useCallback(
+		(payload: OnPlayerJoinOrLeftInRoomMessage) => {
+			dispatch(onPlayerJoinOrLeftInRoom(payload));
+		},
+		[dispatch]
+	);
+
+	const managePlayers = useCallback(
+		(payload: ManagePlayersRequest) => {
+			dispatch(managePlayersThunk(payload));
+		},
+		[dispatch]
+	);
+
+	const addPointToPlayer = useCallback(
+		(payload: AddPointToPlayerRequest) => {
+			dispatch(addPointToPlayerThunk(payload));
+		},
+		[dispatch]
+	);
+
+	const onAddScorePointToPlayer = useCallback(
+		(payload: OnAddPlayerScoreMessage) => {
+			dispatch(onAddScoreToPlayer(payload));
+		},
+		[dispatch]
+	);
+
 	return {
 		quizRooms,
 		quizRoomByIds,
 		quizRoomIds,
 		createQuizRoom,
 		getQuizRooms,
+		onQuizRoomCreated,
+		managePlayers,
+		onPlayerJoinOrLeftInQuizRoom,
+		addPointToPlayer,
+		onAddScorePointToPlayer,
 	};
 };

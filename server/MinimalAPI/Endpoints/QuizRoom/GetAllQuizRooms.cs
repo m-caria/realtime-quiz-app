@@ -13,14 +13,15 @@ public partial class QuizRoomEndpoints
     private static async Task<IResult> GetAllQuizRooms(IQuizRoomServices quizRoomServices)
     {
         IEnumerable<Entities.QuizRoom> rooms = await quizRoomServices.GetAllQuizRoomsAsync();
-
+        
         return Results.Ok(rooms.Select(r => new QuizRoomResponse()
         {
             Id = r.Id,
             Name = r.Name,
             MaxPartecipants = r.MaxPartecipants,
             OwnerName = r.Owner?.UserName ?? "",
-            Players = [.. r.Players.Select(p => new UserResponse(p.UserName, p.Id))]
+            Winner = r.Scores.Where(s => s.Score == 5).FirstOrDefault()?.PlayerId.ToString() ?? string.Empty,
+            Players = [.. r.Players.Select(p => new Player(p.Id, p.UserName, r.Scores.FirstOrDefault(s => s.PlayerId == p.Id)?.Score ?? 0))]
         }));
     }
 }

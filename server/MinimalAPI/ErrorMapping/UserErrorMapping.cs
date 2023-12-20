@@ -12,6 +12,14 @@ public class UserErrorMapping
         Detail = ""
     };
 
+    public static APIExceptionModel UserIdRequired => new()
+    {
+        StatusCode = HttpStatusCode.BadRequest,
+        Code = "user/emptyId",
+        Message = "User Id must not be empty",
+        Detail = ""
+    };
+
     public static APIExceptionModel UserNotFound(string username) => new()
     {
         StatusCode = HttpStatusCode.NotFound,

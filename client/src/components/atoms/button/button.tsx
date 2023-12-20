@@ -36,7 +36,7 @@ const Button: React.FC<Props> = ({
 	return (
 		<button
 			{...props}
-			className={`${props.className} ${iconPositions[iconPosition]} ${buttonVariants[variant]} ${buttonSizes[size]} disabled:bg-opacity-20 disabled:cursor-not-allowed box-border flex items-center justify-center rounded-xl px-4 py-2 uppercase transition-all duration-300 ease-in-out`}
+			className={`${props.className} ${iconPositions[iconPosition]} ${buttonVariants[variant]} ${buttonSizes[size]} disabled:!bg-opacity-40 disabled:cursor-not-allowed box-border flex items-center justify-center rounded-xl px-4 py-2 uppercase transition-all duration-300 ease-in-out`}
 		>
 			{icon && <FontAwesomeIcon icon={icon} />}
 			{text && <Typography className={buttonSizes[size]}>{text}</Typography>}

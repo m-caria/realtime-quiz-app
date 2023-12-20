@@ -1,9 +1,10 @@
-import { UserResponse } from './UserResponse';
+import { Players } from '../Player';
 
 export type QuizRoomResponse = {
 	id: string;
 	name: string;
-	owner: string;
+	ownerName: string;
 	maxPartecipants: number;
-	players: UserResponse[];
+	winner?: string;
+	players: Players[];
 };

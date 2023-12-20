@@ -28,6 +28,14 @@ public class QuizRoomErrorMapping
         Detail = $"The room with id {roomId} not exists."
     };
 
+    public static APIExceptionModel QuizRoomNotFound(string name) => new()
+    {
+        StatusCode = HttpStatusCode.NotFound,
+        Code = "quizRoom/notFound",
+        Message = "Quiz room not found",
+        Detail = $"The room with name {name} not exists."
+    };
+
     public static APIExceptionModel QuizRoomAlreadyExists(string name) => new()
     {
         StatusCode = HttpStatusCode.Conflict,

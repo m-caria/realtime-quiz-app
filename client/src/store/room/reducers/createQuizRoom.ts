@@ -20,7 +20,7 @@ export const createQuizRoomRequestCase = (
 				'0': {
 					isOwner: true,
 					id: '0',
-					owner: action.payload.userId,
+					ownerName: action.payload.userId,
 					players: [],
 					...action.payload,
 				},
@@ -69,7 +69,6 @@ export const createQuizRoomFailureCase = (
 	state: QuizRoomState,
 	action: CreateQuizRoomFailureAction
 ): QuizRoomState => {
-	console.log(action.payload);
 	return {
 		...state,
 		data: state.rollbackData ?? { currentRoom: '', byId: {}, ids: [] },

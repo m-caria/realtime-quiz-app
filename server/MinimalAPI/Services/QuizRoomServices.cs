@@ -45,6 +45,8 @@ public class QuizRoomServices(IQuizRoomQueryWrapper queryWrapper, IQuizRoomComma
 
         room.Players ??= new List<User>();
         room.Players.Add(user);
+        room.Scores ??= new List<QuizRoomScore>();
+        room.Scores.Add(new() { Score = 0, Player = user });
 
         await _commandWrapper.SaveChangesAsync();
         return room;
@@ -54,10 +56,12 @@ public class QuizRoomServices(IQuizRoomQueryWrapper queryWrapper, IQuizRoomComma
     {
         QuizRoom room = await GetQuizRoomByIdAsync(roomId);
         User user = await _userServices.GetUserByIdAsync(userId);
+        QuizRoomScore? score = room.Scores.FirstOrDefault(s => s.PlayerId == userId);
 
-        if (room.Players.Any(p => p.Id == userId))
+        if (room.Players.Any(p => p.Id == userId) && score != null)
         {
             room.Players.Remove(user);
+            room.Scores.Remove(score);
             await _commandWrapper.SaveChangesAsync();
         }
 

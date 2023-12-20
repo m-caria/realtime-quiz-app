@@ -1,4 +1,4 @@
-export type ButtonVariant = 'wrapper' | 'primary' | 'secondary';
+export type ButtonVariant = 'wrapper' | 'primary' | 'secondary' | 'danger';
 type ButtonVariantMap = Record<ButtonVariant, string>;
 
 export type IconPositionKeys = 'left' | 'right';
@@ -16,6 +16,7 @@ export const buttonVariants: ButtonVariantMap = {
 	wrapper: 'bg-transparent hover:bg-opacity-50',
 	primary: 'bg-primary text-white hover:bg-opacity-80',
 	secondary: 'bg-secondary text-white hover:bg-opacity-80',
+	danger: 'bg-danger text-white hover:bg-opacity-80',
 };
 
 export const buttonSizes: ButtonSizeMap = {

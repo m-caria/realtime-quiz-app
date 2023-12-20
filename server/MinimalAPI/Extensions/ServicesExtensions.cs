@@ -16,6 +16,19 @@ public static class ServicesExtensions
         return settings;
     }
 
+    public static void ConfigureCors(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowClient", policy =>
+            {
+                policy.AllowAnyOrigin();
+                policy.AllowAnyMethod();
+                policy.AllowAnyHeader();
+            });
+        });
+    }
+
     public static void ConfigureSwagger(this IServiceCollection services, string version, string title, string description)
     {
         services.AddEndpointsApiExplorer();
@@ -53,6 +66,7 @@ public static class ServicesExtensions
         services.AddScoped<IQuizRoomQueryWrapper, QuizRoomQueryWrapper>();
         services.AddScoped<IUserServices, UserServices>();
         services.AddScoped<IQuizRoomServices, QuizRoomServices>();
+        services.AddScoped<IQuizRoomScoreServices, QuizRoomScoreServices>();
     }
 
     public static void ApplyDbContextMigration(this IApplicationBuilder app)

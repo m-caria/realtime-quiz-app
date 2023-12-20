@@ -55,7 +55,6 @@ const PreConnectPage: React.FC = () => {
 						disabled={!!user.username}
 						placeholder="Inserisci il nome utente..."
 						error={errors.username && 'Il campo nome utente è obbligatorio'}
-						value={user.username}
 					/>
 					<Button
 						icon={faArrowRight}

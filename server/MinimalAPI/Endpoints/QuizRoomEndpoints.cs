@@ -6,5 +6,6 @@ public static partial class QuizRoomEndpoints
         app.MapPost("/api/rooms", CreateQuizRoom);
         app.MapGet("/api/rooms", GetAllQuizRooms);
         app.MapGet("/api/rooms/{roomId}", GetQuizRoom);
+        app.MapPost("/api/rooms/{roomId}/players", ManageQuizRoomPlayers);
     }
 }

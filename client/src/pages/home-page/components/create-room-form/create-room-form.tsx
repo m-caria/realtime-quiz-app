@@ -7,6 +7,7 @@ import { DomainStatus } from '../../../../store';
 import { useQuizRoom } from '../../../../store/room';
 import { useNavigate } from 'react-router-dom';
 import { serverErrors } from '../../../../constants';
+import { SignalRContext } from '../../../../contexts';
 
 type FormData = {
 	roomName: string;
@@ -39,6 +40,7 @@ const CreateRoomForm: React.FC<Props> = ({ isCreatingRoom = true }) => {
 
 	useEffect(() => {
 		if (!roomError && roomStatus === DomainStatus.LOADED && !creatingRoom) {
+			SignalRContext.invoke('CreateGroup', currentRoom);
 			navigate(`/quiz-room/${currentRoom}`);
 		}
 	}, [
@@ -56,7 +58,7 @@ const CreateRoomForm: React.FC<Props> = ({ isCreatingRoom = true }) => {
 			if (user.id) {
 				createQuizRoom({
 					userId: user.id,
-					maxPartecipants: data.maxPartecipants,
+					maxPartecipants: !data.maxPartecipants ? 2 : data.maxPartecipants,
 					name: data.roomName,
 				});
 				setCreatingRoom(false);
@@ -81,9 +83,8 @@ const CreateRoomForm: React.FC<Props> = ({ isCreatingRoom = true }) => {
 					className="basis-2/6"
 					label="Partecipanti"
 					icon={faUsers}
-					placeholder="0"
+					placeholder="2"
 					type="number"
-					value={2}
 				/>
 			</div>
 			{roomError && (

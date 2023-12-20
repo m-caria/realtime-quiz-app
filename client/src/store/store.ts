@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { applicationUserSlice } from './user';
 import { quizRoomSlice } from './room';
+import { questionSlice } from './question';
 
 const appReducers = combineReducers({
 	applicationUser: applicationUserSlice,
 	quizRooms: quizRoomSlice,
+	questions: questionSlice,
 });
 
 export const store = configureStore({

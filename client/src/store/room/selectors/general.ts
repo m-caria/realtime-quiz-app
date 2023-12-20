@@ -1,9 +1,14 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
 export const getQuizRoomState = (state: RootState) => state.quizRooms;
 
-export const getQuizRoomIds = (state: RootState) =>
-	getQuizRoomState(state).data.ids;
+export const getQuizRoomIds = createSelector(
+	getQuizRoomState,
+	(state) => state.data.ids
+);
 
-export const getQuizRoomByIds = (state: RootState) =>
-	getQuizRoomState(state).data.byId;
+export const getQuizRoomByIds = createSelector(
+	getQuizRoomState,
+	(state) => state.data.byId
+);

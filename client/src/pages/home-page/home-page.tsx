@@ -4,16 +4,39 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CreateRoomForm, QuizRoomList } from './components';
 import { useNavigate } from 'react-router-dom';
 import { usePreloader } from '../../hooks';
+import { SignalRContext } from '../../contexts';
+import {
+	OnCreateQuizRoomMessage,
+	OnPlayerJoinOrLeftInRoomMessage,
+} from '../../types';
+import { useQuizRoom } from '../../store';
 
 const HomePage: React.FC = () => {
 	usePreloader();
 	const navigate = useNavigate();
+	const { onQuizRoomCreated, onPlayerJoinOrLeftInQuizRoom } = useQuizRoom();
 	const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
 
 	useEffect(() => {
 		const user = window.sessionStorage.getItem('user');
 		if (!user) navigate('/pre-connect');
 	}, [navigate]);
+
+	SignalRContext.useSignalREffect(
+		'OnRoomCreated',
+		(data: OnCreateQuizRoomMessage) => {
+			onQuizRoomCreated(data);
+		},
+		[]
+	);
+
+	SignalRContext.useSignalREffect(
+		'OnPlayerJoinOrLeftInRoom',
+		(data: OnPlayerJoinOrLeftInRoomMessage) => {
+			onPlayerJoinOrLeftInQuizRoom(data);
+		},
+		[]
+	);
 
 	return (
 		<div className="h-full w-full pt-24 flex-col flex font-secondary">

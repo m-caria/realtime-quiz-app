@@ -24,7 +24,8 @@ public partial class QuizRoomEndpoints
             Name = room.Name,
             MaxPartecipants = room.MaxPartecipants,
             OwnerName = room.Owner?.UserName ?? "",
-            Players = [.. room.Players.Select(p => new UserResponse(p.UserName, p.Id))]
+            Winner = room.Scores.Where(s => s.Score == 5).FirstOrDefault()?.PlayerId.ToString() ?? string.Empty,
+            Players = [.. room.Players.Select(p => new Player(p.Id, p.UserName, room.Scores.FirstOrDefault(s => s.PlayerId == p.Id)?.Score ?? 0))]
         });
     }
 }

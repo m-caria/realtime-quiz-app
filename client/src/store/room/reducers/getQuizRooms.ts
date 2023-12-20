@@ -27,7 +27,13 @@ export const quizRoomsSuccessCase = (
 			...Object.values(action.payload).reduce(
 				(prev, curr) => ({
 					...prev,
-					[curr.id]: curr,
+					[curr.id]: {
+						...curr,
+						winner: curr.winner
+							? curr.players.find((player) => player.id === curr.winner)
+									?.username
+							: '',
+					},
 				}),
 				{}
 			),
